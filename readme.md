@@ -8,7 +8,8 @@ Simple Vue App for printing checks on 8.5x11 paper.
 ## Features
 * Printing
 * Fancy signature font (optional)
-* Routing and Account number uses correct font
+* Routing and Account number uses official E13B Font
+* Run locally to avoid sharing your account number over the internet
 
 
 # Demo
