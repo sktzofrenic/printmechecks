@@ -1,6 +1,5 @@
 <template>
-    <div class="wrapper" id="wrapper">
-        <canvas id="canvas"></canvas>
+    <div class="wrapper" id="wrapper" style="position: relative;">
         <div class="check-box" id="check-box">
             <div style="position: relative;" id="check-box-print">
                 <div class="account-holder-name" style="position: absolute; top: 40px; left: 60px">{{check.accountHolderName}}</div>
@@ -45,8 +44,9 @@
                 </div>
             </div>
         </div>
-        <div class="check-data">
-            <button type="button" style="float: right;" class="btn btn-primary" @click="printCheck">Print</button>
+        <div class="check-data" style="position: absolute; top: 450px">
+            <div class="alert alert-primary" role="alert">Set scale to Custom 67% when printing.</div>
+            <button type="button" style="float: right;" class="btn btn-primary" @click="printCheck">Print (Ctrl + P)</button>
             <form class="row g-3">
                 <div class="col-md-6">
                     <label for="inputEmail4" class="form-label">Account Holder Name</label>
@@ -114,9 +114,9 @@
 <script setup lang="ts">
 import print from 'print-js';
 import { default as converter } from 'number-to-words';
-import { onMounted, onUpdated, ref } from 'vue'
+import { onMounted, onUpdated, reactive } from 'vue'
 
-const check = ref({
+const check = reactive({
     accountHolderName: 'John Smith',
     accountHolderAddress: '123 Cherry Tree Lane',
     accountHolderCity: 'New York',
@@ -137,41 +137,28 @@ function toWords (number: string) {
     return converter.toWords(number)
 }
 
-function renderCanvas () {
-    const canvas: HTMLCanvasElement = document.getElementById('canvas')
-    canvas.width = 1200
-    canvas.height = 500
-    const ctx = canvas.getContext('2d')
-    ctx.fillStyle = 'red'
-    ctx.fillRect(0, 0, 100, 100)
-    return canvas
-}
 
-onMounted(() => {
-    renderCanvas()
-})
-
-onUpdated(() => {
-    renderCanvas()
-})
 
 function printCheck () {
-    print({
-        printable: 'check-box-print',
-        type: 'html',
-        maxWidth: 100,
-        css: [
-            'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
-            'https://fonts.googleapis.com/css2?family=Caveat&display=swap'
-        ],
-        targetStyles: ['*'],
-        documentTitle: 'Check',
-    })
+    window.print()
 }
 
 </script>
 
 <style>
+@media print {
+    .check-box {
+        background-color: white;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        padding: 0px;
+    }
+    .check-data {
+        display: none;
+    }
+}
 label {
     font-weight: bold;
 }
@@ -222,7 +209,7 @@ label {
 }
 .check-box {
     width: 1200px;
-    height: 500px;
+    height: 1553px;
     border: 1px solid #e6e6e6;
     background-color: white;
     margin: 0 auto;
