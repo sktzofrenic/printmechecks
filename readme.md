@@ -12,7 +12,7 @@ Simple Vue App for printing checks on 8.5x11 paper.
 
 
 # Demo
-[Demo](https://drx-danwins.us-east-1.linodeobjects.com/printmechecks/index.html)
+[Demo](https://printmechecks.tiiny.site/)
 
 ## Requirements
 ***Must Have Node installed***
