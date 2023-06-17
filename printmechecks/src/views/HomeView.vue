@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import CheckPrinter from '../components/CheckPrinter.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <CheckPrinter />
   </main>
 </template>
