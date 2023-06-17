@@ -1,5 +1,3 @@
-# PRINTMECHECKS
-
 ![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pmc_51525a39.png) 
 
 Simple Vue App for printing checks on 8.5x11 paper.
