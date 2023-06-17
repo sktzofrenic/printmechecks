@@ -4,15 +4,25 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <template>
 
-    <div class="wrapper">
-
+    <div class="container">
+        <div style="padding-bottom: 20px; padding-top: 20px;">
+            <img  src="@/assets/pmc.png"  />
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <RouterLink to="/" class="nav-link" :class="{'active': $route.path == '/'}">Check</RouterLink>
+            </li>
+            <li class="nav-item">
+                <RouterLink to="/settings" class="nav-link" :class="{'active': $route.path == '/settings'}">Settings</RouterLink>
+            </li>
+        </ul>
       <nav>
-        <RouterLink to="/">Check</RouterLink>
-        <RouterLink to="/settings">Settings</RouterLink>
       </nav>
     </div>
 
-  <RouterView />
+    <div class="container">
+      <RouterView />
+    </div>
 </template>
 
 <style scoped>
