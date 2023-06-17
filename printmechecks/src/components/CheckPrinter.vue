@@ -232,7 +232,7 @@ label {
 
 .banking {
     font-family: 'banking';
-    font-size: 40px;
+    font-size: 37px;
 }
 </style>
 
