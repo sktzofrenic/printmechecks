@@ -107,6 +107,10 @@
                     <label for="inputEmail4" class="form-label">Date</label>
                     <input type="email" class="form-control" id="inputEmail4" v-model="check.date">
                 </div>
+                <div class="col-md-6">
+                    <label for="inputZip" class="form-label">Signature</label>
+                    <input type="text" class="form-control" v-model="check.signature">
+                </div>
             </form>
         </div>
     </div>
