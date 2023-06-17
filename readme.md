@@ -1,6 +1,18 @@
 ![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pmc_51525a39.png) 
 
+## Screenshot
+![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pmc_demo_e1cd462c.png) 
+
 Simple Vue App for printing checks on 8.5x11 paper.
+
+## Features
+* Printing
+* Fancy signature font (optional)
+* Routing and Account number uses correct font
+
+
+# Demo
+[Demo](https://drx-danwins.us-east-1.linodeobjects.com/printmechecks/index.html)
 
 ## Requirements
 ***Must Have Node installed***
