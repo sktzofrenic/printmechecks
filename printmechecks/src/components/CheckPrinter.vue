@@ -13,7 +13,7 @@
                 <div class="amount-box" style="position: absolute; top: 175px; left: 950px">
 
                 </div>
-                <div class="amount-data" style="position: absolute; top: 182px; left: 970px">{{check.amount}}</div>
+                <div class="amount-data" style="position: absolute; top: 182px; left: 970px">{{formatMoney(check.amount)}}</div>
                 <div class="pay-to-data" style="position: absolute; top: 180px; left: 180px">{{check.payTo}}</div>
                 <div class="pay-to" style="position: absolute; top: 170px; left: 60px">
                     Pay to the <br>Order of
@@ -143,6 +143,10 @@ function toWords (number: string) {
 }
 
 
+function formatMoney (number: string) {
+    number = parseFloat(number)
+    return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+}
 
 function printCheck () {
     window.print()
