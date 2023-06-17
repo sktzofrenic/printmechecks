@@ -2,6 +2,9 @@
 
 Simple Vue App for printing checks on 8.5x11 paper.
 
+## Requirements
+***Must Have Node installed***
+
 ## Usage
 
 Clone the repository
