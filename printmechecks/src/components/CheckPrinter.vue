@@ -20,8 +20,11 @@
                         ______________________________________________________________________________________________|
                     
                 </div>
-                <div class="amount-line-data" style="position: absolute; top: 240px; left: 100px">{{toWords(check.amount)}}
-                    {{check.amount.includes('.') ? ` and ${check.amount.split('.')[1]}/100` : ``}}</div>
+                <div class="amount-line-data" style="position: absolute; top: 240px; left: 100px">
+                    {{toWords(check.amount)}}
+                    {{check.amount.includes('.') ? ` and ${check.amount.split('.')[1]}/100` : `and 00/100`}}
+                    <span> {{'〜'.repeat(45 - toWords(check.amount).length) }}</span>
+                </div>
                 <div class="amount-line" style="position: absolute; top: 250px; left: 60px">
                     ________________________________________________________________________________________________________
                     Dollars
@@ -145,7 +148,7 @@ function toWords (number: string) {
 
 function formatMoney (number: string) {
     var numberFloat: float = parseFloat(number)
-    return numberFloat.toLocaleString('en-US')
+    return numberFloat.toLocaleString('en-US', {style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2})
 }
 
 function printCheck () {
@@ -222,6 +225,9 @@ label {
     border: 1px solid #e6e6e6;
     background-color: white;
     margin: 0 auto;
+    background: url('../assets/checkbg.png');
+    background-repeat: no-repeat;
+    background-size: contain;
 }
 
 #check-box {
