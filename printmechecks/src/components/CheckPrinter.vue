@@ -23,7 +23,7 @@
                 <div class="amount-line-data" style="position: absolute; top: 240px; left: 100px">
                     {{toWords(check.amount)}}
                     {{check.amount.includes('.') ? ` and ${check.amount.split('.')[1]}/100` : `and 00/100`}}
-                    <span> {{'〜'.repeat(45 - toWords(check.amount).length) }}</span>
+                    <span style="color: #b100c3" v-if="(86 - toWords(check.amount).length) > 0"> {{'~'.repeat(86 - toWords(check.amount).length) }}</span>
                 </div>
                 <div class="amount-line" style="position: absolute; top: 250px; left: 60px">
                     ________________________________________________________________________________________________________
@@ -49,7 +49,7 @@
         </div>
         <div class="check-data" style="position: absolute; top: 450px">
             <div class="alert alert-primary" role="alert">Set scale to Custom 67% when printing. Also set margins to
-                None</div>
+                None. <strong>Background does not print.</strong></div>
             <button type="button" style="float: right;" class="btn btn-primary" @click="printCheck">Print (Ctrl + P)</button>
             <form class="row g-3">
                 <div class="col-md-6">
@@ -212,6 +212,7 @@ label {
     content: "$";
     font-size: 20px;
     margin-left: -15px;
+    font-weight: bold;
 }
 .amount-box {
     width: 225px;
