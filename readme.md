@@ -1,7 +1,15 @@
 ![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pmc_51525a39.png) 
 
+# Goal
+The purpose of this project is to provide a free, locally run alternative to check printing tools that exist on the
+internet. Some of these tools charge $1.25 or more to print a check. This is silly as this project was literally
+completed in one day and does the same purpose. 
+
+I buy blank check stock from (insert store here) and then use this tool to print checks for all my businesses with
+multiple bank accounts. Works like a charm!
+
 ## Screenshot
-![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pmc_demo_e1cd462c.png) 
+![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pme_bdb244e4.png) 
 
 Simple Vue App for printing checks on 8.5x11 paper.
 
