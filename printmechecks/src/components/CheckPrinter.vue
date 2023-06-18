@@ -144,8 +144,8 @@ function toWords (number: string) {
 
 
 function formatMoney (number: string) {
-    number = parseFloat(number)
-    return number.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+    var numberFloat: float = parseFloat(number)
+    return numberFloat.toLocaleString('en-US')
 }
 
 function printCheck () {
