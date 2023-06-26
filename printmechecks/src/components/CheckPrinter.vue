@@ -16,18 +16,16 @@
                 <div class="amount-data" style="position: absolute; top: 182px; left: 970px">{{formatMoney(check.amount)}}</div>
                 <div class="pay-to-data" style="position: absolute; top: 180px; left: 180px">{{check.payTo}}</div>
                 <div class="pay-to" style="position: absolute; top: 170px; left: 60px">
-                    Pay to the <br>Order of
-                        ______________________________________________________________________________________________|
-                    
+                    Pay to the <br>Order of <span class="payto-line"></span>
                 </div>
-                <div class="amount-line-data" style="position: absolute; top: 240px; left: 100px">
-                    {{toWords(check.amount)}}
+                <div class="amount-line-data" ref="line" style="position: absolute; top: 240px; left: 100px">
+                    {{toWords(check.amount)}} 
                     {{check.amount.includes('.') ? ` and ${check.amount.split('.')[1]}/100` : `and 00/100`}}
-                    <span style="color: #b100c3" v-if="(86 - toWords(check.amount).length) > 0"> {{'~'.repeat(86 - toWords(check.amount).length) }}</span>
                 </div>
+                <span class="check-line-img" :style="{'left': (check.lineLength + 128) + 'px', 'width': '400px',
+                    'display': check.lineLength > 600 ? 'none': ''}"></span>
                 <div class="amount-line" style="position: absolute; top: 250px; left: 60px">
-                    ________________________________________________________________________________________________________
-                    Dollars
+                    <span class="dollar-line"></span>
                 </div>
                 <div class="bank-name" style="position: absolute; top: 300px; left: 60px">{{check.bankName}}</div>
                 <div class="memo-data" style="position: absolute; top: 377px; left: 120px">{{check.memo}}</div>
@@ -122,7 +120,7 @@
 <script setup lang="ts">
 import print from 'print-js';
 import { default as converter } from 'number-to-words';
-import { onMounted, onUpdated, reactive } from 'vue'
+import { ref, reactive, nextTick, watch} from 'vue'
 
 const check = reactive({
     accountHolderName: 'John Smith',
@@ -139,7 +137,9 @@ const check = reactive({
     signature: 'John Smith',
     routingNumber: '022303659',
     bankAccountNumber: '000000000000',
+    lineLength: 166
 })
+
 
 function toWords (number: string) {
     return converter.toWords(number)
@@ -154,6 +154,17 @@ function formatMoney (number: string) {
 function printCheck () {
     window.print()
 }
+
+const line = ref(null)
+
+watch(check, async () => {
+    await nextTick(() => {
+        let computedLine = line?.value?.clientWidth
+        check.lineLength = computedLine
+    })
+}, { immediate: true })
+
+
 
 </script>
 
@@ -244,6 +255,38 @@ label {
 .banking {
     font-family: 'banking';
     font-size: 37px;
+}
+.dollar-line::after{
+    content: "Dollars";
+    font-size: 18px;
+    position: absolute;
+    right: -73px;
+    top: 0;
+}
+.dollar-line {
+    width: 840px;
+    display: block;
+    border-bottom: 1px solid black;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+.payto-line {
+    width: 776px;
+    display: block;
+    border-bottom: 1px solid black;
+    margin-left: 73px;
+    border-right: 1px solid black;
+    height: 28px;
+    margin-top: -32px;
+}
+.check-line-img {
+    display: block;
+    height: 16px;
+    background: url(/src/assets/check-line.png);
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 236px;
 }
 </style>
 
