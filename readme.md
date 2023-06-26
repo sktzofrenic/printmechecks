@@ -9,7 +9,7 @@ I buy blank check stock from (insert store here) and then use this tool to print
 multiple bank accounts. Works like a charm!
 
 ## Screenshot
-![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pme_bdb244e4.png) 
+![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/printmechecks_9c9f824a.png) 
 
 Simple Vue App for printing checks on 8.5x11 paper.
 
