@@ -1,5 +1,8 @@
 ![PMV](https://drx-danwins.us-east-1.linodeobjects.com/drx-danwins/pmc_51525a39.png) 
 
+# What is this?
+Print Me Checks is an open source check printing tool that runs on the web. 
+
 # Goal
 The purpose of this project is to provide a free, locally run alternative to check printing tools that exist on the
 internet. Some of these tools charge $1.25 or more to print a check. This is silly as this project was literally
