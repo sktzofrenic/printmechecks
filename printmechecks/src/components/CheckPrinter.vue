@@ -136,10 +136,10 @@ import {useAppStore} from '../stores/app.ts'
 const state = useAppStore()
 
 function toWords (number: string) {
+    number = number.replace(/[^0-9.]/g, '')
     if (!number) return ''
     return converter.toWords(number)
 }
-
 
 
 function printCheck () {
