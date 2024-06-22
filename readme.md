@@ -4,9 +4,7 @@
 Print Me Checks is an open source check printing tool that runs on the web. 
 
 # Goal
-The purpose of this project is to provide a free, locally run alternative to check printing tools that exist on the
-internet. Some of these tools charge $1.25 or more to print a check. This is silly as this project was literally
-completed in one day and does the same purpose. 
+The purpose of this project is to provide a free, locally run alternative to check printing tools that exist on the internet. Some of these tools charge $1.25 or more to print a check and you must provide your banking details to a third party. This is silly! This project was literally completed in one day and gets the same job done. 
 
 I buy blank check stock from (insert store here) and then use this tool to print checks for all my businesses with
 multiple bank accounts. Works like a charm!
