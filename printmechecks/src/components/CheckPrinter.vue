@@ -34,7 +34,7 @@
                     <span class="dollar-line"></span>
                 </div>
                 <div class="bank-name" style="position: absolute; top: 300px; left: 60px">{{check.bankName}}</div>
-                <div class="memo-data" style="position: absolute; top: 377px; left: 120px">{{check.memo}}</div>
+                <div class="memo-data" style="position: absolute; top: 367px; left: 120px">{{check.memo}}</div>
                 <div class="memo" style="position: absolute; top: 390px; left: 60px">
                     Memo: ____________________________________
                 </div>
@@ -119,6 +119,9 @@
                     <input type="text" class="form-control" v-model="check.signature">
                 </div>
             </form>
+            <div class="col-12" style="margin-top: 30px;">
+                <button type="button" class="btn btn-primary" @click="saveToHistory">Save to History</button>
+            </div>
         </div>
     </div>
 </template>
@@ -126,40 +129,53 @@
 <script setup lang="ts">
 import print from 'print-js';
 import { default as converter } from 'number-to-words';
-import { ref, reactive, nextTick, watch} from 'vue'
+import { ref, reactive, nextTick, watch, onMounted} from 'vue'
+import {formatMoney} from '../utilities.ts'
+import {useAppStore} from '../stores/app.ts'
 
-const check = reactive({
-    accountHolderName: 'John Smith',
-    accountHolderAddress: '123 Cherry Tree Lane',
-    accountHolderCity: 'New York',
-    accountHolderState: 'NY',
-    accountHolderZip: '10001',
-    checkNumber: '554',
-    date: new Date().toLocaleDateString(),
-    bankName: 'Bank Name, INC',
-    amount: '100.00',
-    payTo: 'Michael Johnson',
-    memo: 'Rent',
-    signature: 'John Smith',
-    routingNumber: '022303659',
-    bankAccountNumber: '000000000000',
-    lineLength: 166
-})
-
+const state = useAppStore()
 
 function toWords (number: string) {
+    if (!number) return ''
     return converter.toWords(number)
 }
 
 
-function formatMoney (number: string) {
-    var numberFloat: float = parseFloat(number)
-    return numberFloat.toLocaleString('en-US', {style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2})
-}
 
 function printCheck () {
     window.print()
 }
+
+function saveToHistory () {
+    let checkList = JSON.parse(localStorage.getItem('checkList') || '[]')
+    checkList.push(check)
+    localStorage.setItem('checkList', JSON.stringify(checkList))
+}
+
+function genNewCheck () {
+    let checkList = JSON.parse(localStorage.getItem('checkList') || '[]')
+    let recentCheck = checkList[checkList.length - 1]
+    let check = {}
+    check.accountHolderName = recentCheck?.accountHolderName || 'John Smith'
+    check.accountHolderAddress = recentCheck?.accountHolderAddress || '123 Cherry Tree Lane'
+    check.accountHolderCity = recentCheck?.accountHolderCity || 'New York'
+    check.accountHolderState = recentCheck?.accountHolderState || 'NY'
+    check.accountHolderZip = recentCheck?.accountHolderZip || '10001'
+    check.checkNumber = recentCheck?.checkNumber ? (parseInt(recentCheck?.checkNumber + 1)) : '100'
+    check.date = new Date().toLocaleDateString()
+    check.bankName = recentCheck?.bankName || 'Bank Name, INC'
+    check.amount = '0.00'
+    check.payTo = 'Michael Johnson'
+    check.memo = recentCheck?.memo || 'Rent'
+    check.signature = recentCheck?.signature || 'John Smith'
+    check.routingNumber = recentCheck?.routingNumber || '022303659'
+    check.bankAccountNumber = recentCheck?.bankAccountNumber || '000000000000'
+    return check
+}
+
+const check = reactive(
+    genNewCheck()
+)
 
 const line = ref(null)
 
@@ -171,6 +187,25 @@ watch(check, async () => {
 }, { immediate: true })
 
 
+onMounted(() => {
+    if (state.check) {
+        check.accountHolderName = state.check.accountHolderName
+        check.accountHolderAddress = state.check.accountHolderAddress
+        check.accountHolderCity = state.check.accountHolderCity
+        check.accountHolderState = state.check.accountHolderState
+        check.accountHolderZip = state.check.accountHolderZip
+        check.checkNumber = state.check.checkNumber
+        check.date = state.check.date
+        check.bankName = state.check.bankName
+        check.amount = state.check.amount
+        check.payTo = state.check.payTo
+        check.memo = state.check.memo
+        check.signature = state.check.signature
+        check.routingNumber = state.check.routingNumber
+        check.bankAccountNumber = state.check.bankAccountNumber
+    }
+    state.check = null
+})
 
 </script>
 
@@ -194,7 +229,8 @@ label {
 .memo-data {
     font-family: Caveat;
     font-size: 30px;
-    transform: rotate(-2deg);
+    max-width: 350px;
+    line-height: 0.65;
 }
 .signature-data {
     font-family: Caveat;

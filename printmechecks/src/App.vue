@@ -13,7 +13,7 @@ import { RouterLink, RouterView } from 'vue-router'
                 <RouterLink to="/" class="nav-link" :class="{'active': $route.path == '/'}">Check</RouterLink>
             </li>
             <li class="nav-item">
-                <RouterLink to="/settings" class="nav-link" :class="{'active': $route.path == '/settings'}">Settings</RouterLink>
+                <RouterLink to="/history" class="nav-link" :class="{'active': $route.path == '/history'}">History</RouterLink>
             </li>
         </ul>
       <nav>
