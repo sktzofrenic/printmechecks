@@ -154,6 +154,14 @@ function printCheck () {
           margin: 0;
           padding: 0;
         }
+        .check-box {
+          background: none !important;
+        }
+        .nav,
+        .check-data,
+        #logo-img {
+          display: none !important;
+        }
       }
     `;
     document.head.appendChild(style);
