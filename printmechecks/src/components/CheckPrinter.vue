@@ -52,8 +52,7 @@
             </div>
         </div>
         <div class="check-data" style="position: absolute; top: 450px">
-            <div class="alert alert-primary" role="alert">Set scale to Custom 67% when printing. Also set margins to
-                None. <strong>Background does not print.</strong></div>
+            <div class="alert alert-primary" role="alert"><strong>Background does not print.</strong></div>
             <button type="button" style="float: right;" class="btn btn-primary" @click="printCheck">Print (Ctrl + P)</button>
             <form class="row g-3">
                 <div class="col-md-6">
@@ -129,9 +128,9 @@
 <script setup lang="ts">
 import print from 'print-js';
 import { default as converter } from 'number-to-words';
-import { ref, reactive, nextTick, watch, onMounted} from 'vue'
-import {formatMoney} from '../utilities.ts'
-import {useAppStore} from '../stores/app.ts'
+import { ref, reactive, nextTick, watch, onMounted, onUnmounted } from 'vue'
+import { formatMoney } from '../utilities.ts'
+import { useAppStore } from '../stores/app.ts'
 
 const state = useAppStore()
 
@@ -141,9 +140,33 @@ function toWords (number: string) {
     return converter.toWords(number)
 }
 
-
 function printCheck () {
-    window.print()
+    const style = document.createElement('style');
+    style.textContent = `
+      @media print {
+        @page {
+          margin: 0;
+        }
+        body {
+          transform: scale(1);
+          transform-origin: top center;
+          width: 149%;
+          margin: 0;
+          padding: 0;
+        }
+        .check-box {
+          background: none !important;
+        }
+        .nav,
+        .check-data,
+        #logo-img {
+          display: none !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    window.print();
+    style.remove();
 }
 
 function saveToHistory () {
@@ -186,6 +209,12 @@ watch(check, async () => {
     })
 }, { immediate: true })
 
+function handlePrintShortcut(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'p') {
+        event.preventDefault();
+        printCheck();
+    }
+}
 
 onMounted(() => {
     if (state.check) {
@@ -205,7 +234,13 @@ onMounted(() => {
         check.bankAccountNumber = state.check.bankAccountNumber
     }
     state.check = null
-})
+
+    window.addEventListener('keydown', handlePrintShortcut);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('keydown', handlePrintShortcut);
+});
 
 </script>
 
@@ -331,4 +366,3 @@ label {
     top: 236px;
 }
 </style>
-
