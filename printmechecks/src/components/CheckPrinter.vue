@@ -228,12 +228,10 @@ onMounted(() => {
     }
     state.check = null
 
-    // Add event listener for Ctrl + P
     window.addEventListener('keydown', handlePrintShortcut);
 });
 
 onUnmounted(() => {
-    // Remove event listener to avoid memory leaks
     window.removeEventListener('keydown', handlePrintShortcut);
 });
 
