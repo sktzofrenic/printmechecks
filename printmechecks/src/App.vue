@@ -6,7 +6,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
     <div class="container">
         <div style="padding-bottom: 20px; padding-top: 20px;">
-            <img  src="@/assets/pmc.png"  />
+            <img id="logo-img" src="@/assets/pmc.png"  />
         </div>
         <ul class="nav nav-tabs">
             <li class="nav-item">
