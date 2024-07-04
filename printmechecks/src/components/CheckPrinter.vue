@@ -129,9 +129,9 @@
 <script setup lang="ts">
 import print from 'print-js';
 import { default as converter } from 'number-to-words';
-import { ref, reactive, nextTick, watch, onMounted} from 'vue'
-import {formatMoney} from '../utilities.ts'
-import {useAppStore} from '../stores/app.ts'
+import { ref, reactive, nextTick, watch, onMounted, onUnmounted } from 'vue'
+import { formatMoney } from '../utilities.ts'
+import { useAppStore } from '../stores/app.ts'
 
 const state = useAppStore()
 
@@ -141,9 +141,25 @@ function toWords (number: string) {
     return converter.toWords(number)
 }
 
-
 function printCheck () {
-    window.print()
+    const style = document.createElement('style');
+    style.textContent = `
+      @media print {
+        @page {
+          margin: 0;
+        }
+        body {
+          transform: scale(1);
+          transform-origin: top center;
+          width: 149%;
+          margin: 0;
+          padding: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    window.print();
+    style.remove();
 }
 
 function saveToHistory () {
@@ -186,6 +202,12 @@ watch(check, async () => {
     })
 }, { immediate: true })
 
+function handlePrintShortcut(event: KeyboardEvent) {
+    if (event.ctrlKey && event.key === 'p') {
+        event.preventDefault();
+        printCheck();
+    }
+}
 
 onMounted(() => {
     if (state.check) {
@@ -205,7 +227,15 @@ onMounted(() => {
         check.bankAccountNumber = state.check.bankAccountNumber
     }
     state.check = null
-})
+
+    // Add event listener for Ctrl + P
+    window.addEventListener('keydown', handlePrintShortcut);
+});
+
+onUnmounted(() => {
+    // Remove event listener to avoid memory leaks
+    window.removeEventListener('keydown', handlePrintShortcut);
+});
 
 </script>
 
@@ -331,4 +361,3 @@ label {
     top: 236px;
 }
 </style>
-
