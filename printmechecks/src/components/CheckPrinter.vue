@@ -154,13 +154,27 @@ function printCheck () {
           margin: 0;
           padding: 0;
         }
-        .check-box {
-          background: none !important;
-        }
-        .nav,
-        .check-data,
-        #logo-img {
+        .wrapper > *:not(.check-box) {
           display: none !important;
+        }
+        .check-data {
+            display: none;
+        }
+        .check-box {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          margin: 0;
+          padding: 0px;
+          background-color: white;
+          background: white !important;
+          border: none !important;
+          box-shadow: none !important;
+        }
+        .check-box-print {
+          position: relative;
         }
       }
     `;
@@ -245,19 +259,7 @@ onUnmounted(() => {
 </script>
 
 <style>
-@media print {
-    .check-box {
-        background-color: white;
-        position: fixed;
-        top: 0;
-        left: 0;
-        margin: 0;
-        padding: 0px;
-    }
-    .check-data {
-        display: none;
-    }
-}
+
 label {
     font-weight: bold;
 }
