@@ -184,7 +184,7 @@ function genNewCheck () {
     check.accountHolderCity = recentCheck?.accountHolderCity || 'New York'
     check.accountHolderState = recentCheck?.accountHolderState || 'NY'
     check.accountHolderZip = recentCheck?.accountHolderZip || '10001'
-    check.checkNumber = recentCheck?.checkNumber ? (parseInt(recentCheck?.checkNumber + 1)) : '100'
+    check.checkNumber = recentCheck?.checkNumber ? (parseInt(recentCheck?.checkNumber) + 1) : '100'
     check.date = new Date().toLocaleDateString()
     check.bankName = recentCheck?.bankName || 'Bank Name, INC'
     check.amount = '0.00'
