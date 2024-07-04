@@ -52,8 +52,7 @@
             </div>
         </div>
         <div class="check-data" style="position: absolute; top: 450px">
-            <div class="alert alert-primary" role="alert">Set scale to Custom 67% when printing. Also set margins to
-                None. <strong>Background does not print.</strong></div>
+            <div class="alert alert-primary" role="alert"><strong>Background does not print.</strong></div>
             <button type="button" style="float: right;" class="btn btn-primary" @click="printCheck">Print (Ctrl + P)</button>
             <form class="row g-3">
                 <div class="col-md-6">
