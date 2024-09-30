@@ -15,7 +15,7 @@ multiple bank accounts. Works like a charm!
 Simple Vue App for printing checks on 8.5x11 paper.
 
 ## Features
-* Printing to Browser
+* Printing from the Browser
 * Fancy signature font (optional)
 * Routing and Account number uses official E13B Font
 * Run locally to avoid sharing your account number over the internet
