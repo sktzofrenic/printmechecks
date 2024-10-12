@@ -21,7 +21,6 @@
                 <div class="amount-line-data" ref="line" style="position: absolute; top: 240px; left: 100px">
                     ***
                     {{toWords(check.amount)}} 
-                    {{check.amount.includes('.') ? ` and ${check.amount.split('.')[1]}/100` : `and 00/100`}}
                     ***
                 </div>
                 <div class="amount-line" style="position: absolute; top: 250px; left: 60px">
@@ -121,17 +120,29 @@
 
 <script setup lang="ts">
 import print from 'print-js';
-import { default as converter } from 'number-to-words';
+import { ToWords } from 'to-words';
 import { ref, reactive, nextTick, watch, onMounted, onUnmounted } from 'vue'
 import { formatMoney } from '../utilities.ts'
 import { useAppStore } from '../stores/app.ts'
 
 const state = useAppStore()
 
-function toWords (number: string) {
-    number = number.replace(/[^0-9.]/g, '')
-    if (!number) return ''
-    return converter.toWords(number)
+const toWordsTool = new ToWords({
+  localeCode: 'en-US',
+  converterOptions: {
+    currency: true,
+    ignoreDecimal: false,
+    ignoreZeroCurrency: false,
+    doNotAddOnly: true,
+  },
+});
+
+const toWords: (denom: number | string) => string = (denom) => {
+    try {
+        return toWordsTool.convert(Number(denom), );
+    } catch (e) {
+        return `${e}`;
+    }
 }
 
 function printCheck () {
