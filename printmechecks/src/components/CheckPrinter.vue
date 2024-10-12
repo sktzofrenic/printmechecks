@@ -19,17 +19,11 @@
                     Pay to the <br>Order of <span class="payto-line"></span>
                 </div>
                 <div class="amount-line-data" ref="line" style="position: absolute; top: 240px; left: 100px">
+                    ***
                     {{toWords(check.amount)}} 
                     {{check.amount.includes('.') ? ` and ${check.amount.split('.')[1]}/100` : `and 00/100`}}
+                    ***
                 </div>
-                <img src="/src/assets/check-line.png"
-                    style="max-height: 16px; position: absolute; top: 236px;" 
-                    :style="{
-                        'left': (check.lineLength + 128) + 'px',
-                        'width': '400px',
-                        'display': check.lineLength > 600 ? 'none': '',
-                        'max-width': (780 - check.lineLength) + 'px'
-                    }"/>
                 <div class="amount-line" style="position: absolute; top: 250px; left: 60px">
                     <span class="dollar-line"></span>
                 </div>
@@ -357,14 +351,5 @@ label {
     border-right: 1px solid black;
     height: 28px;
     margin-top: -32px;
-}
-.check-line-img {
-    display: block;
-    height: 16px;
-    background: url(/src/assets/check-line.png);
-    background-repeat: no-repeat;
-    background-size: contain;
-    position: absolute;
-    top: 236px;
 }
 </style>
