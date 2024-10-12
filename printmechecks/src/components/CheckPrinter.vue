@@ -315,15 +315,13 @@ label {
     border: 1px solid #c7c7c7;
     background-color: white;
 }
+
 .check-box {
     width: 1200px;
-    height: 1553px;
-    border: 1px solid #e6e6e6;
-    background-color: white;
+    height: 500px;
     margin: 0 auto;
-    background: url('../assets/checkbg.png');
-    background-repeat: no-repeat;
-    background-size: contain;
+    background-color: #e5e5f7;
+    background: linear-gradient(135deg, #e9eaff55 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(225deg, #e9eaff 25%, transparent 25%) -10px 0/ 20px 20px, linear-gradient(315deg, #e9eaff55 25%, transparent 25%) 0px 0/ 20px 20px, linear-gradient(45deg, #e9eaff 25%, #fdfdff 25%) 0px 0/ 20px 20px;
 }
 
 #check-box {
